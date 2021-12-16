@@ -38,7 +38,7 @@ def criterion_mdp(alloc, Returns):
     return Div_Ratio
 
 ###Sharp Ratio Allocation###
-def criterion_SR(alloc, Returns, Rf):
+def criterion_SR(alloc, Returns, Rf=0):
     """
     This function computes the Maximum Sharpe Ratio Portfolio (SR),
     which attributes the weights that maximize the Sharpe Ratio.
