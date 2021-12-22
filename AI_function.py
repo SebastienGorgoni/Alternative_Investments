@@ -64,6 +64,28 @@ def criterion_SR(alloc, Returns, Rf=0):
     SR = -mu_bar/vol_ptf
     return SR
 
+def MinVol(weights, returns):
+    """
+    This function finds the optimal porfolio with the lowest volatility.
+
+    Parameters
+    ----------
+    weights : Numpy
+        Weights in the investor's portfolio.
+    returns : DataFrame
+        The returns of the portfolio's assets.
+
+    Returns
+    -------
+    portfolio_vol : Float
+        The volatility of the porfolio.
+
+    """
+    performance = np.multiply(returns,weights)
+    performance = np.sum(performance,1)
+    portfolio_vol = np.std(performance)*np.power(252,.5);
+    return portfolio_vol
+
 def cum_prod(returns):
     """
     This function determine the the cumulative returns.
@@ -192,17 +214,16 @@ def perf(returns_ptf, rf):
     VaR_30d = risk_30d['VaR'].mean()
     ES_30d = risk_30d['ES'].mean()
     risk_1y = risk_historical(returns_ptf, 0.95, 252)
-    VaR_1y = risk_1y['VaR'].mean()
-    ES_1y = risk_1y['ES'].mean()
-    df = pd.DataFrame({'Annualized Return': exp, 'Annualized STD': vol, 'Sharpe Ratio': sharpe,
+    # VaR_1y = risk_1y['VaR'].mean()
+    # ES_1y = risk_1y['ES'].mean()
+    df = pd.DataFrame({'Annualized Return (%)': exp*100, 'Annualized STD (%)': vol*100, 'Sharpe Ratio': sharpe,
                        'Sterling Ratio': sterling, 'Burke Ratio': burke,
-                       'Max Drawdown': max_dd.min(), 'Hit Ratio': hit, 
+                       'Max Drawdown (%)': max_dd.min()*100, 'Hit Ratio (%)': hit*100, 
                        'Skewness': skew, 'Kurtosis': excess_kurt,
-                       '30-Day 95% VaR': VaR_30d, '30-Day 95% ES': ES_30d, 
-                       '1-Year 95% VaR': VaR_1y, '1-Year 95% ES': ES_1y}).T
+                       '30d 95% VaR (%)': VaR_30d*100, '30d 95% ES (%)': ES_30d*100}).T
    
     df.rename(columns={0: returns_ptf.name}, inplace=True)
 
-    return df
+    return df.round(3)
 
 
