@@ -17,7 +17,7 @@ The objective create the most diversified portfolio using 3 different asset clas
         
 To understand whether this portfolio allowed to minimize risks, we will also create 3 other types of allocations for comparison purposes: 
        
-* Maximum Sharpe ratio portfolio 
+* Maximum Sharpe ratio portfolio (With and Without Views)
 * Minimum volatility portfolio 
 * Equal-weights portfolio. 
         
