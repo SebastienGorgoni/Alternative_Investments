@@ -1,9 +1,19 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Fri Dec 10 15:17:04 2021
+-----------------------------------------------------------------------
+ALTERNATIVE INVESTMENTS
 
-@author: sebastiengorgoni
+HEC LAUSANNE - AUTUMN 2021
+
+Title: Most Diversified Portfolio Construction
+
+Authors: Sebastien Gorgoni, Alessandro Loury
+
+File Name: AI_function.py
+-----------------------------------------------------------------------
+
+This is an external file for AI_main.py which determine the optimal allocation of all portfolios 
+and compute all necessary performances metrics to analyse their performances.
+
 """
 import numpy as np
 import pandas as pd
@@ -64,6 +74,7 @@ def criterion_SR(alloc, Returns, Rf=0):
     SR = -mu_bar/vol_ptf
     return SR
 
+###Minimum Volatility Allocation###
 def MinVol(weights, returns):
     """
     This function finds the optimal porfolio with the lowest volatility.
@@ -213,7 +224,7 @@ def perf(returns_ptf, rf):
     risk_30d = risk_historical(returns_ptf, 0.95, 30)
     VaR_30d = risk_30d['VaR'].mean()
     ES_30d = risk_30d['ES'].mean()
-    risk_1y = risk_historical(returns_ptf, 0.95, 252)
+    # risk_1y = risk_historical(returns_ptf, 0.95, 252)
     # VaR_1y = risk_1y['VaR'].mean()
     # ES_1y = risk_1y['ES'].mean()
     df = pd.DataFrame({'Annualized Return (%)': exp*100, 'Annualized STD (%)': vol*100, 'Sharpe Ratio': sharpe,
